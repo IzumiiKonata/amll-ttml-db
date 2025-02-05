@@ -21,5 +21,5 @@ jobs:
           git remote add upstream https://github.com/Steve-xmh/amll-ttml-db.git  # 上游仓库地址
           git fetch upstream
           git checkout main  # 同步到main分支
-          git merge upstream/main  # 合并上游仓库的main分支
+          git merge --allow-unrelated-histories upstream/main  # 合并上游仓库的main分支
           git push origin main  # 推送到你的Fork仓库
