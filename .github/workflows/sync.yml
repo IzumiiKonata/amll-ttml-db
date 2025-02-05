@@ -18,6 +18,8 @@ jobs:
 
       - name: Fetch upstream repo
         run: |
+          git config --global user.email "izumiikonatta@gmail.com"
+          git config --global user.name "IzumiiKonata"
           git remote add upstream https://github.com/Steve-xmh/amll-ttml-db.git  # 上游仓库地址
           git fetch upstream
           git checkout main  # 同步到main分支
