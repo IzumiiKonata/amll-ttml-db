@@ -1,0 +1,27 @@
+
+name: Sync Fork
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时自动运行
+  workflow_dispatch:  # 添加此行以支持手动触发
+  
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your forked repo
+        uses: actions/checkout@v2
+        with:
+          repository: IzumiiKonata/amll-ttml-db  # 你的Fork仓库地址
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./  # 克隆到根目录
+
+      - name: Fetch upstream repo
+        run: |
+          git config --global user.email "izumiikonatta@gmail.com"
+          git config --global user.name "IzumiiKonata"
+          git remote add upstream https://github.com/Steve-xmh/amll-ttml-db.git  # 上游仓库地址
+          git fetch upstream
+          git checkout main  # 同步到main分支
+          git merge --allow-unrelated-histories upstream/main  # 合并上游仓库的main分支
+          git push origin main  # 推送到你的Fork仓库
